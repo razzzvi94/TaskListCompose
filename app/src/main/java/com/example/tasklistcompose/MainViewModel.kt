@@ -4,15 +4,15 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 
-class MainViewModel() : ViewModel() {
-    private var _todoList = mutableStateOf(listOf<TodoItem>())
+class MainViewModel : ViewModel() {
+    private val _todoList = mutableStateOf(listOf<TodoItem>())
     val todoList: State<List<TodoItem>> = _todoList
 
-    fun updateList(list: List<TodoItem>) {
-        _todoList.value = list
+    fun addTodo(todo: TodoItem) {
+        _todoList.value += todo
     }
 
-    fun getList(): List<TodoItem> {
-        return _todoList.value
+    fun removeTodo(index: Int) {
+        _todoList.value = _todoList.value.toMutableList().apply { removeAt(index) }
     }
 }

@@ -63,8 +63,7 @@ fun ToDoApp(viewModel: MainViewModel) {
                 onClick = {
                     if (newTodoText.isNotBlank()) {
                         val newTodo = TodoItem(id = System.currentTimeMillis(), text = newTodoText)
-                        val localList = viewModel.getList() + newTodo
-                        viewModel.updateList(localList)
+                        viewModel.addTodo(newTodo)
                         newTodoText = ""
                     }
                 }
@@ -100,8 +99,7 @@ fun ToDoApp(viewModel: MainViewModel) {
                         TodoItemRow(
                             todoItem = listItem,
                             onDelete = {
-                                val localList = viewModel.getList().toMutableList().apply { removeAt(index) }
-                                viewModel.updateList(localList)
+                                viewModel.removeTodo(index)
                             }
                         )
                     }
